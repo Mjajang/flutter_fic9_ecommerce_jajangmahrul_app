@@ -8,7 +8,8 @@ import '../../common/components/custom_text_field.dart';
 import '../../common/components/spaces.dart';
 import '../../common/constants/colors.dart';
 import '../../common/constants/images.dart';
-import '../home/dashboard_page.dart';
+import '../../data/datasources/auth_local_datasource.dart';
+import '../dashboard/dashboard_page.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -81,7 +82,8 @@ class _LoginPageState extends State<LoginPage> {
             listener: (context, state) {
               state.maybeWhen(
                 orElse: () {},
-                success: (data) {
+                success: (data) async {
+                  AuthLocalDatasource().saveAuthData(data);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
